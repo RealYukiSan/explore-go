@@ -1,7 +1,11 @@
 package main
-import "fmt"
+
+import (
+	"explore-go/test"
+	"fmt"
+)
 
 func main() {
-  fmt.Println("Hi, Mom!")
+	coba := &test.Oke{Exposed: "dapat diakses lhoo"}
+	fmt.Println(*&coba.Exposed)
 }
-
