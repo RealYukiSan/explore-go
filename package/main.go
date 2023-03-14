@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	coba := &test.Oke{Exposed: "dapat diakses lhoo"}
-	fmt.Println(*&coba.Exposed)
+	coba := test.Oke{Exposed: "dapat diakses lhoo"}
+	fmt.Println(&coba.Exposed)
 }
