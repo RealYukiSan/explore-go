@@ -6,7 +6,7 @@ import (
 )
 
 func Math() {
-	fmt.Printf("Results : %d", gradingStudents([]uint8{99, 100, 91, 38, 37, 45, 78}))
+	fmt.Printf("Results : %d\n", gradingStudents([]uint8{99, 100, 91, 38, 37, 45, 78}))
 }
 
 /*
