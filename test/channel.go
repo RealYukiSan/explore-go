@@ -9,23 +9,20 @@ func Channel() {
 	runtime.GOMAXPROCS(2)
 
 	var messages = make(chan string)
-	// fungsi ini dijalankan secara asynchronus karena ia merupakan sebuah fungsi yang dijalankan pada goroutine lain
-	var sayHelloTo = func(who string) {
-		var data = fmt.Sprintf("Hello %s", who)
-		messages <- data
+	for _, each := range []string{"lorea", "kiana", "kurisu"} {
+		// fungsi ini dijalankan secara asynchronus karena ia merupakan sebuah fungsi yang dijalankan pada goroutine lain
+		go func(who string) {
+			var data = fmt.Sprintf("Hello %s", who)
+			messages <- data
+		}(each)
 	}
 
-	go sayHelloTo("john wick")
-	go sayHelloTo("makise chan")
-	go sayHelloTo("shinigami")
-
 	// tetapi serah-terimanya dilakukan secara synchronus, maka dari itu kita tidak perlu membuat code blocking seperti fmt.Scan pada commit sebelumnya
-	var message1 = <-messages
-	fmt.Println(message1)
+	for i := 0; i < 3; i++ {
+		printMessage(messages)
+	}
+}
 
-	var message2 = <-messages
-	fmt.Println(message2)
-
-	var message3 = <-messages
-	fmt.Println(message3)
+func printMessage(message chan string) {
+	fmt.Println(<-message)
 }
