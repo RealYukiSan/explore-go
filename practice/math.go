@@ -6,17 +6,24 @@ import (
 )
 
 func Math() {
-	gradingStudents()
+	fmt.Printf("Results : %d", gradingStudents([]uint8{99, 100, 91, 38, 37, 45, 78}))
 }
 
-func gradingStudents() {
-	for _, x := range []int{36, 38, 100, 98, 61} {
-		difference := int(math.Ceil(float64(x)/5) * 5)
+/*
+ * Complete the 'gradingStudents' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts INTEGER_ARRAY grades as parameter.
+ */
+func gradingStudents(grades []uint8) []uint8 {
+	// Write your code here
+	for i, x := range grades {
+		difference := uint8(math.Ceil(float64(x)/5) * 5)
 
 		if x >= 38 && x <= 100 && difference-x < 3 {
-			fmt.Printf("Output : %d\n", difference)
-		} else {
-			fmt.Println("The number cannot ceiled :v")
+			grades[i] = difference
 		}
 	}
+
+	return grades
 }
