@@ -1,16 +1,25 @@
 package practice
 
 import (
-	"fmt"
+	"log"
 	"net/http"
-	"time"
+
+	graphql "github.com/graph-gophers/graphql-go"
+	"github.com/graph-gophers/graphql-go/relay"
 )
 
-func greet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World! %s", time.Now())
-}
+type query struct{}
 
-func main() {
-	http.HandleFunc("/", greet)
-	http.ListenAndServe(":8080", nil)
+func (_ *query) Hello() string { return "Hello word" }
+
+func GQLServer() {
+	s := `
+		type Query {
+			hello: String!
+		}
+	`
+
+	schema := graphql.MustParseSchema(s, &query{})
+	http.Handle("/query", &relay.Handler{Schema: schema})
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
