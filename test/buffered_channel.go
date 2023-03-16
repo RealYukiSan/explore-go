@@ -2,12 +2,9 @@ package test
 
 import (
 	"fmt"
-	"runtime"
 )
 
 func BufferedChannel() {
-	runtime.GOMAXPROCS(2)
-
 	messages := make(chan int, 3)
 
 	go func() {

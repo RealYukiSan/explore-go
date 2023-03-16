@@ -2,12 +2,9 @@ package test
 
 import (
 	"fmt"
-	"runtime"
 )
 
 func Channel() {
-	runtime.GOMAXPROCS(2)
-
 	var messages = make(chan string)
 	for _, each := range []string{"lorea", "kiana", "kurisu"} {
 		// fungsi ini dijalankan secara asynchronus karena ia merupakan sebuah fungsi yang dijalankan pada goroutine lain

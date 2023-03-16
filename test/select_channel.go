@@ -2,12 +2,9 @@ package test
 
 import (
 	"fmt"
-	"runtime"
 )
 
 func SelectChannel() {
-	runtime.GOMAXPROCS(2)
-
 	numbers := []int{3, 4, 3, 5, 6, 7, 8, 9, 3, 2}
 	fmt.Println("numbers :", numbers)
 	ch1 := make(chan float64)
