@@ -27,7 +27,7 @@ func ImplementArray() {
 	fmt.Println("data array \t:", numbers)
 
 	// multi-dimension array
-	matrix := [2][3]int{[3]int{3, 2, 1}, [3]int{1, 2, 3}}
+	matrix := [2][3]int{{3, 2, 1}, {1, 2, 3}}
 
 	fmt.Println("matrix :", matrix)
 }
