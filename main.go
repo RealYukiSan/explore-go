@@ -7,5 +7,5 @@ import (
 
 func main() {
 	runtime.GOMAXPROCS(2)
-	test.RangenClose()
+	test.TimeoutChannel()
 }
