@@ -6,7 +6,8 @@ import (
 )
 
 func Math() {
-	fmt.Printf("Results : %d\n", gradingStudents([]uint8{99, 100, 91, 38, 37, 45, 78}))
+	// fmt.Printf("Results : %d\n", gradingStudents([]uint8{99, 100, 91, 38, 37, 45, 78}))
+	plusMinus([]int32{1, 2, 0, -4, 5})
 }
 
 /*
@@ -26,4 +27,29 @@ func gradingStudents(grades []uint8) []uint8 {
 	}
 
 	return grades
+}
+
+/*
+ * Complete the 'plusMinus' function below.
+ *
+ * The function accepts INTEGER_ARRAY arr as parameter.
+ */
+func plusMinus(arr []int32) {
+	// Write your code here
+	positive := 0
+	negative := 0
+	zero := 0
+	for _, value := range arr {
+		if value < 0 {
+			negative++
+		} else if value > 0 {
+			positive++
+		} else {
+			zero++
+		}
+	}
+
+	fmt.Printf("%f\n", float32(positive)/float32(len(arr)))
+	fmt.Printf("%f\n", float32(negative)/float32(len(arr)))
+	fmt.Printf("%f\n", float32(zero)/float32(len(arr)))
 }
