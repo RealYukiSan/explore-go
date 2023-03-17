@@ -7,5 +7,5 @@ import "explore-go/practice"
 
 func main() {
 	// runtime.GOMAXPROCS(2)
-	practice.ImplementParser()
+	practice.RestFulAPIServer()
 }
