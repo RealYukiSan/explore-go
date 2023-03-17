@@ -74,4 +74,14 @@ func ImplementMap() {
 	if !isExist {
 		fmt.Println("value pada key tersebut tidak ditemukan!")
 	}
+
+	var chickens = []map[string]string{
+		{"name": "ichigo", "gender": "male"},
+		{"name": "ramboo", "gender": "female"},
+		{"different_key": "beda jir"},
+	}
+
+	for _, chicken := range chickens {
+		fmt.Println(chicken["name"], chicken["gender"])
+	}
 }
