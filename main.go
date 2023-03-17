@@ -6,8 +6,6 @@ import "explore-go/practice"
 // "runtime"
 
 func main() {
-	practice.Math()
 	// runtime.GOMAXPROCS(2)
-	// test.TimeoutChannel()
-	// practice.GQLServer()
+	practice.ImplementParser()
 }
