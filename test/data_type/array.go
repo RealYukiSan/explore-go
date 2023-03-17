@@ -56,3 +56,22 @@ func ImplementSlice() {
 	fmt.Println(cFruits)
 	fmt.Println(dFruits)
 }
+
+func ImplementMap() {
+	// dapat juga di inisiasi dengan keyword make(map[string]int) atau *new(map[string]int)
+	var months map[string]int // default zero value is nil
+	// months["february"] = 2 // will throw an error! karena default value nya nil, maka dari itu anda perlu assign terlebih dahulu, seperti: months = map[string]int{} agak weird sih, tapi terima aja :v
+	months = map[string]int{"januari": 01, "desember": 12}
+	for key, value := range months {
+		fmt.Println(key, "\t:", value)
+	}
+	fmt.Println(len(months))
+
+	delete(months, "desember")
+	fmt.Println(len(months))
+
+	var _, isExist = months["ga ada"]
+	if !isExist {
+		fmt.Println("value pada key tersebut tidak ditemukan!")
+	}
+}

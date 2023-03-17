@@ -10,5 +10,5 @@ func main() {
 	// runtime.GOMAXPROCS(2)
 	// test.TimeoutChannel()
 	// practice.GQLServer()
-	test.ImplementSlice()
+	test.ImplementMap()
 }
