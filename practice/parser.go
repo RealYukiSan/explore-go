@@ -47,9 +47,10 @@ func parseJson() {
 	var data1 map[string]interface{}
 	var data2 interface{}
 	var data3 []User
+	var err error
 
 	// decode section
-	err := json.Unmarshal(jsonData, &data)
+	err = json.Unmarshal(jsonData, &data)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -59,9 +60,9 @@ func parseJson() {
 	fmt.Println("Fullname :", data.Fullname)
 	fmt.Println("Age :", data.Age)
 
-	e := json.Unmarshal(jsonData, &data1)
-	if e != nil {
-		fmt.Println(e.Error())
+	err = json.Unmarshal(jsonData, &data1)
+	if err != nil {
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -69,9 +70,9 @@ func parseJson() {
 	fmt.Println("Fullname :", data1["Name"])
 	fmt.Println("Age :", data1["Age"])
 
-	er := json.Unmarshal(jsonData, &data2)
-	if er != nil {
-		fmt.Println(er.Error())
+	err = json.Unmarshal(jsonData, &data2)
+	if err != nil {
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -89,12 +90,13 @@ func parseJson() {
 
 	// encode section
 	var object = []User{{"L", 12}, {"Yagami", 23}}
-	var jesonData, emror = json.Marshal(object)
-	if emror != nil {
-		fmt.Println(emror.Error())
+	jsonData, err = json.Marshal(object)
+
+	if err != nil {
+		fmt.Println(err.Error())
 		return
 	}
 
-	var jesonString = string(jesonData)
+	var jesonString = string(jsonData)
 	fmt.Println(jesonString)
 }
