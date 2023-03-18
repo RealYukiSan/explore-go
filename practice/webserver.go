@@ -68,8 +68,7 @@ func fetchUsers(client http.Client) ([]student, error) {
 
 	defer response.Body.Close()
 
-	err = json.NewDecoder(response.Body).Decode(&data)
-	if err != nil {
+	if err = json.NewDecoder(response.Body).Decode(&data); err != nil {
 		return nil, err
 	}
 
@@ -100,8 +99,7 @@ func fetchUser(ID string, client http.Client) (student, error) {
 
 	defer response.Body.Close()
 
-	err = json.NewDecoder(response.Body).Decode(&data)
-	if err != nil {
+	if err = json.NewDecoder(response.Body).Decode(&data); err != nil {
 		return data, err
 	}
 
