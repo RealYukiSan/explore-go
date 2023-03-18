@@ -52,8 +52,9 @@ var data = []student{
 
 const BASEURL = "http://localhost:8080"
 
-func fetchUsers(client http.Client, err error) ([]student, error) {
+func fetchUsers(client http.Client) ([]student, error) {
 	var data []student
+	var err error
 
 	request, err := http.NewRequest("GET", BASEURL+"/users", nil)
 	if err != nil {
@@ -75,8 +76,9 @@ func fetchUsers(client http.Client, err error) ([]student, error) {
 	return data, nil
 }
 
-func fetchUser(ID string, client http.Client, err error) (student, error) {
+func fetchUser(ID string, client http.Client) (student, error) {
 	var data student
+	var err error
 
 	// for POST method
 	// var param = url.Values{}
@@ -110,7 +112,7 @@ func HttpClient() {
 	client := &http.Client{}
 	var err error
 
-	users, err := fetchUsers(*client, err)
+	users, err := fetchUsers(*client)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -120,7 +122,7 @@ func HttpClient() {
 		fmt.Printf("ID: %s\t Name: %s\t Grade: %d\n", each.ID, each.Name, each.Grade)
 	}
 
-	user, err := fetchUser("B001", *client, err)
+	user, err := fetchUser("B001", *client)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
