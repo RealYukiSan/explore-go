@@ -52,10 +52,8 @@ var data = []student{
 
 const BASEURL = "http://localhost:8080"
 
-func HttpClient() ([]student, error) {
-	client := &http.Client{}
+func fetchUsers(client http.Client, err error) ([]student, error) {
 	var data []student
-	var err error
 
 	request, err := http.NewRequest("GET", BASEURL+"/users", nil)
 	if err != nil {
@@ -77,6 +75,62 @@ func HttpClient() ([]student, error) {
 	return data, nil
 }
 
+func fetchUser(ID string, client http.Client, err error) (student, error) {
+	var data student
+
+	// for POST method
+	// var param = url.Values{}
+	// param.Set("id", ID)
+	// var payload = bytes.NewBufferString(param.Encode())
+
+	// request, err := http.NewRequest("POST", BASEURL+"/user", payload)
+	// request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	request, err := http.NewRequest("GET", BASEURL+"/user", nil)
+	q := request.URL.Query()
+	q.Add("id", ID)
+	request.URL.RawQuery = q.Encode()
+
+	response, err := client.Do(request)
+	if err != nil {
+		return data, err
+	}
+
+	defer response.Body.Close()
+
+	err = json.NewDecoder(response.Body).Decode(&data)
+	if err != nil {
+		return data, err
+	}
+
+	return data, nil
+}
+
+func HttpClient() {
+	client := &http.Client{}
+	var err error
+
+	users, err := fetchUsers(*client, err)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	for _, each := range users {
+		fmt.Printf("ID: %s\t Name: %s\t Grade: %d\n", each.ID, each.Name, each.Grade)
+	}
+
+	user, err := fetchUser("B001", *client, err)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println("fetch spesific user")
+	fmt.Printf("ID: %s\t Name: %s\t Grade: %d\n", user.ID, user.Name, user.Grade)
+
+}
+
 func RestFulAPIServer() {
 	http.HandleFunc("/user", user)
 	http.HandleFunc("/users", users)
@@ -91,11 +145,12 @@ func user(w http.ResponseWriter, r *http.Request) {
 		id := r.FormValue("id")
 		for _, user := range data {
 			if user.ID == id {
-				var encoded, err = json.Marshal(data)
+				var encoded, err = json.Marshal(user)
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusInternalServerError)
 					return
 				}
+
 				w.Write(encoded)
 				return
 			}
