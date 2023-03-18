@@ -1,11 +1,21 @@
 package main
 
-import "explore-go/practice"
-
-// "explore-go/test/data_type"
-// "runtime"
+import (
+	"explore-go/practice"
+	"fmt"
+)
 
 func main() {
-	// runtime.GOMAXPROCS(2)
-	practice.RestFulAPIServer()
+	go practice.RestFulAPIServer()
+	users, err := practice.HttpClient()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	for _, each := range users {
+		fmt.Printf("ID: %s\t Name: %s\t Grade: %d\n", each.ID, each.Name, each.Grade)
+	}
+
+	fmt.Scanln()
 }

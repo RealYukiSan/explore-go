@@ -50,6 +50,33 @@ var data = []student{
 	},
 }
 
+const BASEURL = "http://localhost:8080"
+
+func HttpClient() ([]student, error) {
+	client := &http.Client{}
+	var data []student
+	var err error
+
+	request, err := http.NewRequest("GET", BASEURL+"/users", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	response, err := client.Do(request)
+	if err != nil {
+		return nil, err
+	}
+
+	defer response.Body.Close()
+
+	err = json.NewDecoder(response.Body).Decode(&data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+
 func RestFulAPIServer() {
 	http.HandleFunc("/user", user)
 	http.HandleFunc("/users", users)
