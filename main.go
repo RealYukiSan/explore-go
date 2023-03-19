@@ -8,7 +8,7 @@ import (
 func main() {
 	runtime.GOMAXPROCS(2)
 
-	fundamental.ImplementWaitGroup()
+	fundamental.ImplementMutex()
 
 	// go practice.RestFulAPIServer()
 	// practice.HttpClient()
