@@ -7,6 +7,7 @@ import (
 )
 
 type counter struct {
+	sync.Mutex
 	val int
 }
 
@@ -15,7 +16,9 @@ func (c *counter) Value() (x int) {
 }
 
 func (c *counter) Add(x int) {
+	c.Lock()
 	c.val++
+	c.Unlock()
 }
 
 func ImplementMutex() {
@@ -35,6 +38,6 @@ func ImplementMutex() {
 		}()
 	}
 
-	wg.Done()
+	wg.Wait()
 	fmt.Println(meter.Value())
 }
