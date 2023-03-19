@@ -1,12 +1,16 @@
 package main
 
 import (
-	"explore-go/practice"
-	"fmt"
+	"explore-go/fundamental"
+	"runtime"
 )
 
 func main() {
-	go practice.RestFulAPIServer()
-	practice.HttpClient()
-	fmt.Scanln()
+	runtime.GOMAXPROCS(2)
+
+	fundamental.ImplementWaitGroup()
+
+	// go practice.RestFulAPIServer()
+	// practice.HttpClient()
+	// fmt.Scanln()
 }
