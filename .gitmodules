@@ -1,0 +1,3 @@
+[submodule "practice/explore-http"]
+	path = practice/explore-http
+	url = https://github.com/Reyuki-san/explore-http.git
